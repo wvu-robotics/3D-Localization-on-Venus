@@ -16,7 +16,7 @@
 % Development History
 % Date              Developer        Comments
 % ---------------   -------------    --------------------------------
-% May 20, 2023      H. Cottrill      Initial implemention
+% July 10, 2023     H. Cottrill      Initial implemention
 % 
 
 %% Initialization
@@ -25,7 +25,22 @@ clear
 close all
 load Venus_map.mat
 
-%% Terrain Map
+%% Terrain Map [LLH]
+
+figure()
+hold on
+grid on
+
+mesh(Venus_xm_lon,Venus_ym_lat,Venus_map)
+c=colorbar('FontSize',12);
+c.Label.String ='Elevation [m]';
+axis([-5 5 -5 5 -inf inf]);
+xlabel('Longitude [deg]');
+ylabel('Latitude [deg]');
+set(gca,'fontsize',12);
+view(0,90)
+
+%% Terrain Map [XYZ]
 
 figure()
 hold on
@@ -74,14 +89,14 @@ view(3)
 
 %% Pressure Map
 
-% altitude = 50000:75000;
-% pressure = 1000*air_pressure(altitude);
-% 
-% figure()
-% hold on
-% grid on
-% 
-% area([0 pressure],[75000 altitude])
-% xlabel('Pressure [Pa]')
-% ylabel('Altitude [m]')
-% ylim([50000 75000])\
+altitude = 50000:75000;
+pressure = 1000*air_pressure(altitude);
+
+figure()
+hold on
+grid on
+
+area([0 pressure],[75000 altitude])
+xlabel('Pressure [Pa]')
+ylabel('Altitude [m]')
+ylim([50000 75000])
